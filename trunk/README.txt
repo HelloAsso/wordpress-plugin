@@ -75,6 +75,9 @@ https://www.youtube.com/watch?v=Bjaqc_Yun8g
 
 == Changelog ==
 
+= 1.1.6 =
+* Ajout des sécurités nécessaires pour éviter les injections de code (HTML sanitizer)
+
 = 1.1.5 =
 * Compatibilité avec la version 6.4.2 de WordPress
 
