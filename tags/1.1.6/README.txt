@@ -3,9 +3,9 @@ Contributors: helloasso, yohannkipfer
 Donate link: https://helloasso.com
 Tags: helloasso, donation, payment, hello-asso.com, helloasso.com, association, crowdfunding, don
 Requires at least: 4.0
-Tested up to: 6.4.2
+Tested up to: 6.4.3
 Requires PHP: 7.2.34
-Stable tag: 6.4.2
+Stable tag: 6.4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -74,6 +74,9 @@ https://www.youtube.com/watch?v=Bjaqc_Yun8g
 2. Iframes des campagnes
 
 == Changelog ==
+
+= 1.1.6 =
+* Ajout des sécurités nécessaires pour éviter les injections de code (HTML sanitizer)
 
 = 1.1.5 =
 * Compatibilité avec la version 6.4.2 de WordPress

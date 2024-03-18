@@ -16,7 +16,7 @@
  * Plugin Name:       HelloAsso
  * Plugin URI:        https://centredaide.helloasso.com/s/article/paiement-en-ligne-wordpress-integrer-vos-campagnes-helloasso
  * Description:       HelloAsso est la solution gratuite des associations pour collecter des paiements et des dons sur internet.
- * Version:           1.1.5
+ * Version:           1.1.6
  * Author:            HelloAsso
  * Author URI:        https://helloasso.com
  * License:           GPL-2.0+
@@ -36,7 +36,7 @@ if (!defined('WPINC')) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define('HELLO_ASSO_VERSION', '1.1.5');
+define('HELLO_ASSO_VERSION', '1.1.6');
 
 /**
  * The code that runs during plugin activation.
