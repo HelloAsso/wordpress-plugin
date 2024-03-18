@@ -1,7 +1,7 @@
-=== Plugin Name ===
+=== HelloAsso ===
 Contributors: helloasso, yohannkipfer
 Donate link: https://helloasso.com
-Tags: helloasso, donation, payment, hello-asso.com, helloasso.com, association, crowdfunding, don
+Tags: helloasso, paiement, association, crowdfunding, don
 Requires at least: 4.0
 Tested up to: 6.4.3
 Requires PHP: 7.2.34
