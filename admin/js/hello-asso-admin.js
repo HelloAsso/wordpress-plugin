@@ -356,7 +356,20 @@ const loadViewCampaign = (url, type) => {
 function insertIframeInTinyMce(data) {
 	var type = jQuery(data).attr('data-type');
 	var url = jQuery('.lastUrlWidget').val();
-	var shortcode = '[helloasso campaign="' + url + '" type="' + type + '"]';
+	var height = "70px";
+	if(type == "widget-bouton")
+	{
+		height = "70px";
+	}
+	else if(type == "widget")
+	{
+		height = "750px";
+	}
+	else if(type == "widget-vignette")
+	{
+		height = "450px";
+	}
+	var shortcode = '[helloasso campaign="' + url + '" type="' + type + '" height="' + height + '"]';
 	jQuery('#ha-popup').hide();
 	window.location.hash = '';
 	var numItems = jQuery('.ha-input-shortcode').length;
@@ -426,7 +439,21 @@ const haCopy = data => {
 	var type = jQuery(data).attr('data-type');
 	var url = jQuery('.lastUrlWidget').val();
 
-	jQuery('.lastShortcode').val('[helloasso campaign="' + url + '" type="' + type + '"]');
+	var height = "70px";
+	if(type == "widget-bouton")
+	{
+		height = "70px";
+	}
+	else if(type == "widget")
+	{
+		height = "750px";
+	}
+	else if(type == "widget-vignette")
+	{
+		height = "450px";
+	}
+
+	jQuery('.lastShortcode').val('[helloasso campaign="' + url + '" type="' + type + '" height="' + height + '"]');
 
 	toCopy.select();
 	document.execCommand('copy');

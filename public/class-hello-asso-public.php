@@ -117,15 +117,18 @@ class Hello_Asso_Public {
 
 			if($type == "widget-bouton")
 			{
-				$styleIframe = 'style="width:200px; height:70px; border:none;"';
+				$height = $atts['height'] ?? "70px";
+				$styleIframe = 'style="width:200px; height:'. $height . '; border:none;"';
 			}
-			elseif($type == "widget")
+			else if($type == "widget")
 			{
-				$styleIframe = 'style="width:100%; height:750px; border:none;"';
+				$height = $atts['height'] ?? "750px";
+				$styleIframe = 'style="width:100%; height:'. $height . '; border:none;"';
 			}
-			elseif($type == "widget-vignette")
+			else if($type == "widget-vignette")
 			{
-				$styleIframe = 'style="width:350px; height:450px; border:none;"';
+				$height = $atts['height'] ?? "450px";
+				$styleIframe = 'style="width:350px; height:'. $height . '; border:none;"';
 			}
 
 			ob_start();
