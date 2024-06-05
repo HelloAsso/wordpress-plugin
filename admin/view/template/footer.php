@@ -21,5 +21,5 @@
     <path fill="url(#SVGID_3_)" d="M13.5 8.1c11.9-1.3 25.4 11 23.7 13.9 3.3-5.8 4.1-15.1-7.5-20.4C18.6-2.9 6 2.5 1.6 13.7.2 17.2-.3 21 .2 24.7-.6 11.9 9.1 8.5 13.5 8.1z"/>
   </svg>
 
-  <div class="ha-copyright">Tous droits réservés © <?= esc_html(date('Y')); ?> - HelloAsso for Wordpress v1.1.7</div>
+  <div class="ha-copyright">Tous droits réservés © <?= esc_html(date('Y')); ?> - HelloAsso for Wordpress v1.1.9</div>
 </div>
