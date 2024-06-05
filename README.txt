@@ -64,6 +64,12 @@ Si vous avez déjà un compte HelloAsso, vous pouvez alors installer cette exten
 = J'ai un problème ou une question, comment contacter le support ? =
 Notre équipe Accompagnement est disponible par email (contact@helloasso.org) et par téléphone du lundi au vendredi au 05 64 88 02 34.
 
+= Où puis-je signaler les failles de sécurité trouvées dans ce plugin ? =
+Veuillez signaler les failles de sécurité trouvées dans le code source du plugin helloasso via le [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/helloasso). L'équipe de Patchstack vous assistera pour la vérification, l'attribution de CVE et notifiera les développeurs de ce plugin.
+
+= Where do I report security bugs found in this plugin? =
+Please report security bugs found in the source code of the helloasso plugin through the [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/helloasso). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
+
 == Video ==
 
 https://www.youtube.com/watch?v=Bjaqc_Yun8g
@@ -81,6 +87,7 @@ https://www.youtube.com/watch?v=Bjaqc_Yun8g
 
 = 1.1.6 =
 * Ajout des sécurités nécessaires pour éviter les injections de code (HTML sanitizer)
+* Ajout du lien vers le programme de bug bounty.
 
 = 1.1.5 =
 * Compatibilité avec la version 6.4.2 de WordPress
