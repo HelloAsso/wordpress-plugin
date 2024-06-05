@@ -75,6 +75,10 @@ https://www.youtube.com/watch?v=Bjaqc_Yun8g
 
 == Changelog ==
 
+= 1.1.7 =
+* Ajout de la possibilité de spécifier une hauteur dans le shortcode afin de voir les formulaires de don en entier.
+* Correction d'un bug provoquant une erreur critique lors de la liaison d'une assication sans campagne.
+
 = 1.1.6 =
 * Ajout des sécurités nécessaires pour éviter les injections de code (HTML sanitizer)
 
