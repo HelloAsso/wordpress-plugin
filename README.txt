@@ -5,7 +5,7 @@ Tags: helloasso, paiement, association, crowdfunding, don
 Requires at least: 4.0
 Tested up to: 6.4.3
 Requires PHP: 7.2.34
-Stable tag: 6.4.3
+Stable tag: 1.1.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
