@@ -1,0 +1,13 @@
+/.git
+/.github
+/.wordpress-org
+
+.distignore
+.gitignore
+CODE-OF-CONDUCT.md
+CONTRIBUTING.md
+ISSUE_TEMPLATE.md
+LICENSE
+PULL_REQUEST_TEMPLATE.md
+README.md
+SECURITY.md
