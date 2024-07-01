@@ -110,24 +110,27 @@ class Hello_Asso_Public {
 			$type = $atts['type'];
 			$allowed_styles = array(
 			'style' => array(
+			'width' => array(),
 			'height' => array(),
 			'border' => array(),
 				),
 			);
 
+			$pattern = '/^\d+px$/';
+
 			if($type == "widget-bouton")
 			{
-				$height = $atts['height'] ?? "70px";
+				$height = preg_match($pattern, $atts['height'] ?? 0) ? $atts['height'] : "70px";
 				$styleIframe = 'style="width:200px; height:'. $height . '; border:none;"';
 			}
 			else if($type == "widget")
 			{
-				$height = $atts['height'] ?? "750px";
+				$height = preg_match($pattern, $atts['height'] ?? 0) ? $atts['height'] : "750px";
 				$styleIframe = 'style="width:100%; height:'. $height . '; border:none;"';
 			}
 			else if($type == "widget-vignette")
 			{
-				$height = $atts['height'] ?? "450px";
+				$height = preg_match($pattern, $atts['height'] ?? 0) ? $atts['height'] : "450px";
 				$styleIframe = 'style="width:350px; height:'. $height . '; border:none;"';
 			}
 
