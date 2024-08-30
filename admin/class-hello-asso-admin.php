@@ -456,6 +456,10 @@ class Hello_Asso_Admin {
 
 		function ha_ajax() {
 			check_ajax_referer('helloassosecuritytoken11', 'security');
+		
+			if ( ! is_user_logged_in() || ! current_user_can('manage_options') ) {
+				wp_die('Vous n’avez pas les droits nécessaires pour exécuter cette action.');
+			}
 
 			if (!isset($_POST['campaign']) or $_POST['campaign'] == '') {
 				$campaign = array();
