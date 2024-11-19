@@ -5,7 +5,7 @@ Tags: helloasso, paiement, association, crowdfunding, don
 Requires at least: 4.0
 Tested up to: 6.4.3
 Requires PHP: 7.2.34
-Stable tag: 1.1.11
+Stable tag: 1.1.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,6 +80,9 @@ https://www.youtube.com/watch?v=Bjaqc_Yun8g
 2. Iframes des campagnes
 
 == Changelog ==
+
+= 1.1.12 =
+* Correction d'une faille XSS possible sur l'insertion de l'iframe
 
 = 1.1.11 =
 * Correction d'une faille Broken Access Control
