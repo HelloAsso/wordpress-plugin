@@ -132,6 +132,12 @@ class Hello_Asso_Public {
 			{
 				$height = preg_match($pattern, $atts['height'] ?? 0) ? $atts['height'] : "450px";
 				$styleIframe = 'style="width:350px; height:'. $height . '; border:none;"';
+			} else {
+				$type = "";
+			}
+
+			if(!str_starts_with($url, "https://www.helloasso.com/")) {
+				$url = "";
 			}
 
 			ob_start();

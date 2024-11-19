@@ -369,6 +369,14 @@ function insertIframeInTinyMce(data) {
 	{
 		height = "450px";
 	}
+	else
+	{
+		type = "";
+	}
+
+	if(!url.startsWith('https://www.helloasso.com/')) {
+		url = "";
+	}
 	var shortcode = '[helloasso campaign="' + url + '" type="' + type + '" height="' + height + '"]';
 	jQuery('#ha-popup').hide();
 	window.location.hash = '';
