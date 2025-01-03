@@ -34,7 +34,7 @@ L'extension HelloAsso permet vous permet d'intégrer vos formulaires de paiement
 * Campagne de financement participatif
 * Formulaire de vente
 
-Support HelloAsso : Une équipe de 15 personnes disponible par téléphone (05 64 88 02 34) et par email à contact@helloasso.org
+Support HelloAsso : Une équipe de 15 personnes disponible via notre [centre d'aide](https://centredaide.helloasso.com/association?question=comment-integrer-mes-campagnes-sur-wordpress).
 
 
 == Installation ==
