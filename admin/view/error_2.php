@@ -27,29 +27,27 @@
 		<div class="ha-header-row">
 			<div class="ha-header-col">
 				<?php 
-					$nbCampaign = count($campaigns);
-					if(get_option('ha-error') == 0):
-						if(get_option('ha-sync') > strtotime('-90 days')): ?>
+					if(get_option('ha-error') == 0) {
+						if(get_option('ha-sync') > strtotime('-90 days')) { ?>
 							<h1><?= esc_html(stripslashes(get_option('ha-name'))); ?></h1>
 							<h5>Dernière synchronisation réussie le <?= esc_html(date('d/m/Y à H:i:s', get_option('ha-sync'))); ?> </h5>
-						<?php else: ?>
+						<?php } else { ?>
 							<h1><?= esc_html(stripslashes(get_option('ha-name'))); ?></h1>
 							<div class="ha-header-message-flex">
 								<img src="<?= esc_url(plugin_dir_url( __FILE__ )); ?>icons/alert-triangle.svg" /> 
 								<h5>Dernière synchronisation réussie le <?= esc_html(date('d/m/Y à H:i:s', get_option('ha-sync'))); ?>, <span class="semibold">Veuillez resynchroniser</span></h5>
 							</div>
 						<?php 
-						endif;
-					else:  
-						$nbCampaign = 0; 
+						}
+					} else {
 						?>
 							<h1><?= esc_html(stripslashes(get_option('ha-name'))); ?></h1>
 							<div class="ha-header-message-flex">
 								<img src="<?= esc_url(plugin_dir_url( __FILE__ )); ?>icons/alert-triangle.svg" /> 
 								<h5>La synchronisation a échouée</h5>
 							</div>
-				<?php endif; ?>
-				<h3>0 HelloAsso publics</h3>
+				<?php } ?>
+				<h3>aucune campagne publique</h3>
 			</div>
 			<div class="ha-header-col">
 				<a href="<?= esc_url(admin_url()); ?>admin.php?page=hello-asso" class="ha-btn">Resynchroniser</a>
