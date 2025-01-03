@@ -72,7 +72,7 @@ Please report security bugs found in the source code of the helloasso plugin thr
 
 == Video ==
 
-https://www.youtube.com/watch?v=yrv1_PIakac
+[youtube https://www.youtube.com/watch?v=yrv1_PIakac]
 
 == Screenshots ==
 
