@@ -3,9 +3,9 @@ Contributors: helloasso, yohannkipfer
 Donate link: https://helloasso.com
 Tags: helloasso, paiement, association, crowdfunding, don
 Requires at least: 4.0
-Tested up to: 6.4.3
+Tested up to: 6.7.1
 Requires PHP: 7.2.34
-Stable tag: 1.1.12
+Stable tag: 1.1.13
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -62,7 +62,7 @@ Seules les associations françaises déclarées et qui possèdent un compte banc
 Si vous avez déjà un compte HelloAsso, vous pouvez alors installer cette extension sur votre site et suivre la documentation disponible pour intégrer vos formulaires de paiement sur votre site WordPress. Si vous n'avez pas encore de compte HelloAsso, créez votre compte sur le site HelloAsso (https://www.helloasso.com/inscription) et commencez à créer un ou plusieurs formulaires de paiement. Une fois votre formulaire créé, vous le retrouverez dans l'extension WordPress et vous pourrez l'intégrer à votre site.
 
 = J'ai un problème ou une question, comment contacter le support ? =
-Notre équipe Accompagnement est disponible par email (contact@helloasso.org) et par téléphone du lundi au vendredi au 05 64 88 02 34.
+Notre équipe Accompagnement est disponible via notre [centre d'aide](https://centredaide.helloasso.com/association?question=comment-integrer-mes-campagnes-sur-wordpress).
 
 = Où puis-je signaler les failles de sécurité trouvées dans ce plugin ? =
 Veuillez signaler les failles de sécurité trouvées dans le code source du plugin helloasso via le [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/helloasso). L'équipe de Patchstack vous assistera pour la vérification, l'attribution de CVE et notifiera les développeurs de ce plugin.
@@ -72,7 +72,7 @@ Please report security bugs found in the source code of the helloasso plugin thr
 
 == Video ==
 
-https://www.youtube.com/watch?v=Bjaqc_Yun8g
+https://www.youtube.com/watch?v=yrv1_PIakac
 
 == Screenshots ==
 
@@ -80,6 +80,9 @@ https://www.youtube.com/watch?v=Bjaqc_Yun8g
 2. Iframes des campagnes
 
 == Changelog ==
+
+= 1.1.13 =
+* Bon affichage, même si l'association n'a aucune campagne publique
 
 = 1.1.12 =
 * Correction d'une faille XSS possible sur l'insertion de l'iframe
