@@ -98,8 +98,9 @@ class Hello_Asso_Admin {
 
 			foreach ($campaign as $key => $campain) :
 
-				if (isset($campain['endDate']) && strlen($campain['endDate']) > 4) {
-					if (time() > strtotime($campain['endDate'])) {
+				$endDate = $campain['endDate'] ?? '';
+				if (strlen($endDate) > 4) {
+					if (time() > strtotime($endDate)) {
 						$incrementArray = 0;
 					} else {
 						$incrementArray = 1;
@@ -110,7 +111,8 @@ class Hello_Asso_Admin {
 
 				if (strtolower($campain['formType']) == "event") {
 
-					if (isset($campain['startDate']) && time() > strtotime($campain['startDate'])) {
+					$startDate = $campain['startDate'] ?? '';
+					if (time() > strtotime($startDate)) {
 						$incrementArray = 0;
 					} else {
 						$incrementArray = 1;
