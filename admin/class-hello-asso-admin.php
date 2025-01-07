@@ -297,7 +297,7 @@ class Hello_Asso_Admin {
 				$pageWidget = "ha-no-sync";
 				$type = "error_1";
 			} else {
-				$campaign = get_option('ha-campaign');
+				$campaign = get_option('ha-campaign') ?? [];
 				$nbCampaign = count($campaign);
 				if (($nbCampaign == 0 or $campaign == '') && get_option('ha-error') == 0) {
 					$pageWidget = "ha-no-campaign";
@@ -362,7 +362,7 @@ class Hello_Asso_Admin {
 					<div id="ha-dropdown" class="ha-dropdown-content">
 						<a href="<?= esc_url(admin_url()); ?>admin.php?page=hello-asso">Synchronisation</a>
 						<?php
-						$campaign = get_option('ha-campaign');
+						$campaign = get_option('ha-campaign') ?? [];
 						$nbCampaign = count($campaign);
 
 						if (get_option('ha-slug') == '') {
