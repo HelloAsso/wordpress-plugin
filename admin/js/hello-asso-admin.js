@@ -183,82 +183,84 @@ const searchCampaign = () => {
 						success: function (result2) {
 
 							var assoName = result2.name;
-							let totalCount = 0; 
-							for (let i = 1; i <= 5; i++){      
-								
-								setTimeout(function () {   
-								   console.log(i);
+							let totalCount = 0;
+							for (let i = 1; i <= 5; i++) {
 
-				
-								   jQuery.ajax({
-									url: `https://api.helloasso.com/v5/organizations/${nameAsso}/forms?pageSize=20&pageIndex=${i}`,
-									type: 'GET',
-									timeout: 30000,
-									headers: {
-										'Authorization': 'Bearer ' + bearerToken
-									},
-									dataType: "json",
-									complete: function (result) {
-										jQuery('.ha-loader').hide();
-									},
-									success: function (result3) {
-										let count = result3.data.length;
-										totalCount += count;
-										console.log(result3);
-										console.log(count);
+								setTimeout(function () {
+									console.log(i);
 
 
-										jQuery.ajax({
-											url: adminAjax.ajaxurl,
-											method: 'POST',
-											data: { action: 'ha_ajax', 'name': assoName, 'campaign': result3.data, 'slug': nameAsso, 'error': 0, 'security': adminAjax.ajax_nonce, 'increase': i },
-											success: function (data) {
-												
-												if(totalCount == result3.pagination.totalCount) {
-													location.reload();
-												}
-	
-											},
-											error: function (data) {
-											}
-										});
-									},
-									error: function (xhr, ajaxOptions, thrownError) {
-	
-										if (ajaxOptions == "timeout") {
-											jQuery('.ha-no-sync').show();
-											jQuery(".searchCampaign").html('Synchroniser');
-											jQuery('.ha-error span').html('Service momentanément indisponible.<br/>Veuillez réessayer plus tard ou contacter le support HelloAsso.');
-										}
-										else {
-											if (xhr.status == 404) {
-												jQuery.ajax({
-													url: adminAjax.ajaxurl,
-													method: 'POST',
-													data: { action: 'ha_ajax', 'campaign': '', 'slug': nameAsso, 'error': 1, 'security': adminAjax.ajax_nonce },
-													success: function (data) {
-	
-														location.reload();
-	
-													},
-													error: function (data) {
+									jQuery.ajax({
+										url: `https://api.helloasso.com/v5/organizations/${nameAsso}/forms?pageSize=20&pageIndex=${i}`,
+										type: 'GET',
+										timeout: 30000,
+										headers: {
+											'Authorization': 'Bearer ' + bearerToken
+										},
+										dataType: "json",
+										complete: function (result) {
+											jQuery('.ha-loader').hide();
+										},
+										success: function (result3) {
+											let count = result3.data.length;
+											totalCount += count;
+											console.log(result3);
+											console.log(count);
+
+
+											jQuery.ajax({
+												url: adminAjax.ajaxurl,
+												method: 'POST',
+												data: { action: 'ha_ajax', 'name': assoName, 'campaign': result3.data, 'slug': nameAsso, 'error': 0, 'security': adminAjax.ajax_nonce, 'increase': i },
+												success: function (data) {
+
+													console.log(data)
+													if (totalCount == result3.pagination.totalCount) {
+														//location.reload();
 													}
-												});
-											}
-											else if (xhr.status == 500) {
+
+												},
+												error: function (data) {
+													console.log(data)
+												}
+											});
+										},
+										error: function (xhr, ajaxOptions, thrownError) {
+
+											if (ajaxOptions == "timeout") {
 												jQuery('.ha-no-sync').show();
 												jQuery(".searchCampaign").html('Synchroniser');
 												jQuery('.ha-error span').html('Service momentanément indisponible.<br/>Veuillez réessayer plus tard ou contacter le support HelloAsso.');
 											}
-										}
-									},
-								});
+											else {
+												if (xhr.status == 404) {
+													jQuery.ajax({
+														url: adminAjax.ajaxurl,
+														method: 'POST',
+														data: { action: 'ha_ajax', 'campaign': '', 'slug': nameAsso, 'error': 1, 'security': adminAjax.ajax_nonce },
+														success: function (data) {
 
-								}, i*1250)
+															location.reload();
+
+														},
+														error: function (data) {
+														}
+													});
+												}
+												else if (xhr.status == 500) {
+													jQuery('.ha-no-sync').show();
+													jQuery(".searchCampaign").html('Synchroniser');
+													jQuery('.ha-error span').html('Service momentanément indisponible.<br/>Veuillez réessayer plus tard ou contacter le support HelloAsso.');
+												}
+											}
+										},
+									});
+
+								}, i * 1250)
 							}
 
 
-						
+
 
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
@@ -357,24 +359,20 @@ function insertIframeInTinyMce(data) {
 	var type = jQuery(data).attr('data-type');
 	var url = jQuery('.lastUrlWidget').val();
 	var height = "70px";
-	if(type == "widget-bouton")
-	{
+	if (type == "widget-bouton") {
 		height = "70px";
 	}
-	else if(type == "widget")
-	{
+	else if (type == "widget") {
 		height = "750px";
 	}
-	else if(type == "widget-vignette")
-	{
+	else if (type == "widget-vignette") {
 		height = "450px";
 	}
-	else
-	{
+	else {
 		type = "";
 	}
 
-	if(!url.startsWith('https://www.helloasso.com/')) {
+	if (!url.startsWith('https://www.helloasso.com/')) {
 		url = "";
 	}
 	var shortcode = '[helloasso campaign="' + url + '" type="' + type + '" height="' + height + '"]';
@@ -448,16 +446,13 @@ const haCopy = data => {
 	var url = jQuery('.lastUrlWidget').val();
 
 	var height = "70px";
-	if(type == "widget-bouton")
-	{
+	if (type == "widget-bouton") {
 		height = "70px";
 	}
-	else if(type == "widget")
-	{
+	else if (type == "widget") {
 		height = "750px";
 	}
-	else if(type == "widget-vignette")
-	{
+	else if (type == "widget-vignette") {
 		height = "450px";
 	}
 
