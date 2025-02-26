@@ -214,9 +214,8 @@ const searchCampaign = () => {
 												data: { action: 'ha_ajax', 'name': assoName, 'campaign': result3.data, 'slug': nameAsso, 'error': 0, 'security': adminAjax.ajax_nonce, 'increase': i },
 												success: function (data) {
 
-													console.log(data)
 													if (totalCount == result3.pagination.totalCount) {
-														//location.reload();
+														location.reload();
 													}
 
 												},
