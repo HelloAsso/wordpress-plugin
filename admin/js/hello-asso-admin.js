@@ -126,10 +126,15 @@ const searchCampaign = () => {
 	}
 	else {
 		var url = parseUrl(value);
+		var sandbox = false;
 		if (url != null) {
 			var domain = url.hostname;
 
-			if (domain != 'helloasso.com' && domain != 'www.helloasso.com') {
+			if (domain == 'helloasso-sandbox.com' || domain == 'www.helloasso-sandbox.com') {
+				sandbox = true;
+			}
+
+			if (domain != 'helloasso.com' && domain != 'www.helloasso.com' && domain != 'helloasso-sandbox.com' && domain != 'www.helloasso-sandbox.com') {
 				var nameAsso = '';
 			}
 			else {
@@ -142,17 +147,24 @@ const searchCampaign = () => {
 		}
 
 		if (nameAsso != '') {
+			var apiUrl = 'https://api.helloasso.com';
 			var body = {
 				grant_type: 'client_credentials',
 				client_id: '049A416C-5820-45FE-B645-1D06FB4AA622',
 				client_secret: 'I+YF/JjLrcE1+iPEFul+BBJDWIil+1g5'
 			};
 
+			if (sandbox) {
+				apiUrl = 'https://api.helloasso-sandbox.com';
+				body.client_id = '3732d11d-e73a-40a2-aa28-a54fa1aa76be';
+				body.client_secret = 'vOsIvf7T496A5/LGeTG6Uq7CNdFydh8s';
+			}
+
 			jQuery('.ha-error').hide();
 			jQuery('.ha-sync').hide();
 
 			jQuery.ajax({
-				url: 'https://api.helloasso.com/oauth2/token',
+				url: apiUrl + '/oauth2/token',
 				type: 'POST',
 				dataType: 'json',
 				timeout: 30000,
@@ -170,7 +182,7 @@ const searchCampaign = () => {
 
 					var bearerToken = result.access_token;
 					jQuery.ajax({
-						url: `https://api.helloasso.com/v5/organizations/${nameAsso}`,
+						url: apiUrl + `/v5/organizations/${nameAsso}`,
 						type: 'GET',
 						timeout: 30000,
 						headers: {
@@ -191,7 +203,7 @@ const searchCampaign = () => {
 
 
 									jQuery.ajax({
-										url: `https://api.helloasso.com/v5/organizations/${nameAsso}/forms?pageSize=20&pageIndex=${i}`,
+										url: apiUrl + `/v5/organizations/${nameAsso}/forms?pageSize=20&pageIndex=${i}`,
 										type: 'GET',
 										timeout: 30000,
 										headers: {
@@ -371,7 +383,7 @@ function insertIframeInTinyMce(data) {
 		type = "";
 	}
 
-	if (!url.startsWith('https://www.helloasso.com/')) {
+	if (!url.startsWith('https://www.helloasso.com/') && !url.startsWith('https://www.helloasso-sandbox.com/')) {
 		url = "";
 	}
 	var shortcode = '[helloasso campaign="' + url + '" type="' + type + '" height="' + height + '"]';

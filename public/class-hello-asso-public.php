@@ -20,7 +20,8 @@
  * @subpackage Hello_Asso/public
  * @author     HelloAsso
  */
-class Hello_Asso_Public {
+class Hello_Asso_Public
+{
 
 	/**
 	 * The ID of this plugin.
@@ -47,11 +48,11 @@ class Hello_Asso_Public {
 	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct($plugin_name, $version)
+	{
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-
 	}
 
 	/**
@@ -59,7 +60,8 @@ class Hello_Asso_Public {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_styles() {
+	public function enqueue_styles()
+	{
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -73,8 +75,7 @@ class Hello_Asso_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, esc_html(plugin_dir_url( __FILE__ )) . 'css/hello-asso-public.css', array(), $this->version, 'all' );
-
+		wp_enqueue_style($this->plugin_name, esc_html(plugin_dir_url(__FILE__)) . 'css/hello-asso-public.css', array(), $this->version, 'all');
 	}
 
 	/**
@@ -82,7 +83,8 @@ class Hello_Asso_Public {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts() {
+	public function enqueue_scripts()
+	{
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -96,56 +98,49 @@ class Hello_Asso_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, esc_html(plugin_dir_url( __FILE__ )) . 'js/hello-asso-public.js', array( 'jquery' ), $this->version, false );
-
+		wp_enqueue_script($this->plugin_name, esc_html(plugin_dir_url(__FILE__)) . 'js/hello-asso-public.js', array('jquery'), $this->version, false);
 	}
 
 	public function loadShortcode()
-	{	
-		add_shortcode( 'helloasso', 'ha_shortcode' );
+	{
+		add_shortcode('helloasso', 'ha_shortcode');
 
 		function ha_shortcode($atts)
 		{
 			$url = $atts['campaign'];
 			$type = $atts['type'];
 			$allowed_styles = array(
-			'style' => array(
-			'width' => array(),
-			'height' => array(),
-			'border' => array(),
+				'style' => array(
+					'width' => array(),
+					'height' => array(),
+					'border' => array(),
 				),
 			);
 
 			$pattern = '/^\d+px$/';
 
-			if($type == "widget-bouton")
-			{
+			if ($type == "widget-bouton") {
 				$height = preg_match($pattern, $atts['height'] ?? 0) ? $atts['height'] : "70px";
-				$styleIframe = 'style="width:200px; height:'. $height . '; border:none;"';
-			}
-			else if($type == "widget")
-			{
+				$styleIframe = 'style="width:200px; height:' . $height . '; border:none;"';
+			} else if ($type == "widget") {
 				$height = preg_match($pattern, $atts['height'] ?? 0) ? $atts['height'] : "750px";
-				$styleIframe = 'style="width:100%; height:'. $height . '; border:none;"';
-			}
-			else if($type == "widget-vignette")
-			{
+				$styleIframe = 'style="width:100%; height:' . $height . '; border:none;"';
+			} else if ($type == "widget-vignette") {
 				$height = preg_match($pattern, $atts['height'] ?? 0) ? $atts['height'] : "450px";
-				$styleIframe = 'style="width:350px; height:'. $height . '; border:none;"';
+				$styleIframe = 'style="width:350px; height:' . $height . '; border:none;"';
 			} else {
 				$type = "";
 			}
 
-			if(!str_starts_with($url, "https://www.helloasso.com/")) {
+			if (!str_starts_with($url, "https://www.helloasso.com/") && !str_starts_with($url, "https://www.helloasso-sandbox.com/")) {
 				$url = "";
 			}
 
 			ob_start();
-			?>
-			<iframe src="<?= esc_url($url); ?><?= esc_html($type); ?>"  id="idIframe" <?= wp_kses($styleIframe, $allowed_styles); ?> border="0"></iframe>
-			<?php
+?>
+			<iframe src="<?= esc_url($url); ?><?= esc_html($type); ?>" id="idIframe" <?= wp_kses($styleIframe, $allowed_styles); ?> border="0"></iframe>
+<?php
 			return ob_get_clean();
 		}
 	}
-
 }
