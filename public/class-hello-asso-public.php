@@ -98,7 +98,8 @@ class Hello_Asso_Public
 		 * class.
 		 */
 
-		wp_enqueue_script($this->plugin_name, esc_html(plugin_dir_url(__FILE__)) . 'js/hello-asso-public.js', array('jquery'), $this->version, false);
+		wp_enqueue_script('iframe-resizer', plugin_dir_url(__FILE__) . 'js/iframe-resizer.jquery.js', array('jquery'), $this->version, false);
+		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/hello-asso-public.js', array('jquery'), $this->version, false);
 	}
 
 	public function loadShortcode()
