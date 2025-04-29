@@ -3,9 +3,9 @@ Contributors: helloasso, yohannkipfer
 Donate link: https://helloasso.com
 Tags: helloasso, paiement, association, crowdfunding, don
 Requires at least: 4.0
-Tested up to: 6.7.2
+Tested up to: 6.8
 Requires PHP: 7.2.34
-Stable tag: 1.1.18
+Stable tag: 1.1.19
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,6 +80,9 @@ Please report security bugs found in the source code of the helloasso plugin thr
 2. Iframes des campagnes
 
 == Changelog ==
+
+= 1.1.19 =
+* Les widgets se redimensionnent automatiquement
 
 = 1.1.18 =
 * Ajout du support de la sandbox
