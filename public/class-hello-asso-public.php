@@ -98,7 +98,6 @@ class Hello_Asso_Public
 		 * class.
 		 */
 
-		wp_enqueue_script('iframe-resizer', plugin_dir_url(__FILE__) . 'js/iframe-resizer.jquery.js', array('jquery'), $this->version, false);
 		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/hello-asso-public.js', array('jquery'), $this->version, false);
 	}
 
@@ -113,22 +112,23 @@ class Hello_Asso_Public
 			$allowed_styles = array(
 				'style' => array(
 					'width' => array(),
-					'height' => array(),
-					'border' => array(),
-				),
+					'height' => array()
+				)
 			);
 
 			$pattern = '/^\d+px$/';
 
+			$height = "750px";
+			$width = "100%";
 			if ($type == "widget-bouton") {
 				$height = preg_match($pattern, $atts['height'] ?? 0) ? $atts['height'] : "70px";
-				$styleIframe = 'style="width:200px; height:' . $height . '; border:none;"';
+				$width = '200px';
 			} else if ($type == "widget") {
 				$height = preg_match($pattern, $atts['height'] ?? 0) ? $atts['height'] : "750px";
-				$styleIframe = 'style="width:100%; height:' . $height . '; border:none;"';
+				$width = '100%';
 			} else if ($type == "widget-vignette") {
 				$height = preg_match($pattern, $atts['height'] ?? 0) ? $atts['height'] : "450px";
-				$styleIframe = 'style="width:350px; height:' . $height . '; border:none;"';
+				$width = '350px';
 			} else {
 				$type = "";
 			}
@@ -139,7 +139,15 @@ class Hello_Asso_Public
 
 			ob_start();
 ?>
-			<iframe src="<?= esc_url($url); ?><?= esc_html($type); ?>" id="idIframe" <?= wp_kses($styleIframe, $allowed_styles); ?> border="0"></iframe>
+			<iframe
+				id="idIframe"
+				src="<?= esc_url($url); ?><?= esc_html($type); ?>"
+				<?= wp_kses('height=' . $height . '"', $allowed_styles); ?>
+				<?= wp_kses('width=' . $width . '"', $allowed_styles); ?>
+				frameborder="0"
+				loading="lazy"
+				allowtransparency="true"
+				onload="resizeIframeMessage()"></iframe>
 <?php
 			return ob_get_clean();
 		}
