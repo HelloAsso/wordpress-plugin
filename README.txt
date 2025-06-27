@@ -5,7 +5,7 @@ Tags: helloasso, paiement, association, crowdfunding, don
 Requires at least: 4.0
 Tested up to: 6.8
 Requires PHP: 7.2.34
-Stable tag: 1.1.20
+Stable tag: 1.1.21
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,6 +80,9 @@ Please report security bugs found in the source code of the helloasso plugin thr
 2. Iframes des campagnes
 
 == Changelog ==
+
+= 1.1.21 =
+* Déplacement des appels API en back pour éviter les erreurs CORS
 
 = 1.1.20 =
 * Correciton de conflit avec ACF

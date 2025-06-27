@@ -441,9 +441,10 @@ class Hello_Asso_Admin
 
 	public function loadAjax()
 	{
-
 		add_action('wp_ajax_ha_ajax', 'ha_ajax');
 		add_action('wp_ajax_nopriv_ha_ajax', 'ha_ajax');
+		add_action('wp_ajax_ha_search_campaign', 'ha_search_campaign');
+		add_action('wp_ajax_nopriv_ha_search_campaign', 'ha_search_campaign');
 
 		function sanitizeArray($data = array())
 		{
@@ -461,12 +462,190 @@ class Hello_Asso_Admin
 			return $data;
 		}
 
+		function ha_search_campaign()
+		{
+			check_ajax_referer('helloassosecuritytoken11', 'security');
+
+			if (!is_user_logged_in() || !current_user_can('manage_options')) {
+				wp_die('Vous n\'avez pas les droits nécessaires pour exécuter cette action.');
+			}
+
+			$value = sanitize_text_field($_POST['value']);
+
+			if (empty($value)) {
+				wp_send_json_error('Le champ est vide.');
+				return;
+			}
+
+			$url = parse_url($value);
+			$sandbox = false;
+			$nameAsso = '';
+
+			if ($url !== false) {
+				$domain = $url['host'];
+
+				if ($domain == 'helloasso-sandbox.com' || $domain == 'www.helloasso-sandbox.com') {
+					$sandbox = true;
+				}
+
+				if ($domain != 'helloasso.com' && $domain != 'www.helloasso.com' && $domain != 'helloasso-sandbox.com' && $domain != 'www.helloasso-sandbox.com') {
+					$nameAsso = '';
+				} else {
+					$slug = explode('/', $value);
+					$nameAsso = isset($slug[4]) ? $slug[4] : '';
+				}
+			} else {
+				$nameAsso = sanitize_title_with_dashes($value);
+			}
+
+			if (empty($nameAsso)) {
+				wp_send_json_error('URL ou nom d\'association invalide.');
+				return;
+			}
+
+			$apiUrl = $sandbox ? 'https://api.helloasso-sandbox.com' : 'https://api.helloasso.com';
+			$body = array(
+				'grant_type' => 'client_credentials',
+				'client_id' => $sandbox ? '3732d11d-e73a-40a2-aa28-a54fa1aa76be' : '049A416C-5820-45FE-B645-1D06FB4AA622',
+				'client_secret' => $sandbox ? 'vOsIvf7T496A5/LGeTG6Uq7CNdFydh8s' : 'I+YF/JjLrcE1+iPEFul+BBJDWIil+1g5'
+			);
+
+			$token_response = ha_curl_post($apiUrl . '/oauth2/token', $body);
+
+			if ($token_response === false) {
+				wp_send_json_error('Erreur de connexion à l\'API HelloAsso.');
+				return;
+			}
+
+			$token_data = json_decode($token_response, true);
+
+			if (!isset($token_data['access_token'])) {
+				wp_send_json_error('Erreur d\'authentification avec l\'API HelloAsso.');
+				return;
+			}
+
+			$bearer_token = $token_data['access_token'];
+
+			$org_response = ha_curl_get($apiUrl . '/v5/organizations/' . $nameAsso, $bearer_token);
+
+			if ($org_response === false) {
+				wp_send_json_error('Erreur lors de la récupération des informations de l\'organisation.');
+				return;
+			}
+
+			$org_data = json_decode($org_response, true);
+
+			if (!isset($org_data['name'])) {
+				wp_send_json_error('Organisation non trouvée.');
+				return;
+			}
+
+			$asso_name = $org_data['name'];
+			$all_campaigns = array();
+			$total_count = 0;
+
+			for ($i = 1; $i <= 5; $i++) {
+				$campaign_response = ha_curl_get($apiUrl . '/v5/organizations/' . $nameAsso . '/forms?pageSize=20&pageIndex=' . $i, $bearer_token);
+
+				if ($campaign_response === false) {
+					continue;
+				}
+
+				$campaign_data = json_decode($campaign_response, true);
+
+				if (isset($campaign_data['data']) && is_array($campaign_data['data'])) {
+					$count = count($campaign_data['data']);
+					$total_count += $count;
+					$all_campaigns = array_merge($all_campaigns, $campaign_data['data']);
+
+					if (isset($campaign_data['pagination']['totalCount']) && $total_count >= $campaign_data['pagination']['totalCount']) {
+						break;
+					}
+				}
+
+				usleep(1250000);
+			}
+
+			if (empty($all_campaigns)) {
+				wp_send_json_error('Aucune campagne trouvée pour cette organisation.');
+				return;
+			}
+
+			$result = array(
+				'success' => true,
+				'asso_name' => $asso_name,
+				'campaigns' => $all_campaigns,
+				'total_count' => $total_count,
+				'slug' => $nameAsso
+			);
+
+			wp_send_json($result);
+		}
+
+		function ha_curl_post($url, $data)
+		{
+			$ch = curl_init();
+
+			curl_setopt($ch, CURLOPT_URL, $url);
+			curl_setopt($ch, CURLOPT_POST, true);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+				'Content-Type: application/x-www-form-urlencoded'
+			));
+
+			$response = curl_exec($ch);
+			$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+			$error = curl_error($ch);
+
+			curl_close($ch);
+
+			if ($error || $http_code !== 200) {
+				return false;
+			}
+
+			return $response;
+		}
+
+		function ha_curl_get($url, $bearer_token = null)
+		{
+			$ch = curl_init();
+
+			curl_setopt($ch, CURLOPT_URL, $url);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+
+			$headers = array();
+			if ($bearer_token) {
+				$headers[] = 'Authorization: Bearer ' . $bearer_token;
+			}
+
+			if (!empty($headers)) {
+				curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+			}
+
+			$response = curl_exec($ch);
+			$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+			$error = curl_error($ch);
+
+			curl_close($ch);
+
+			if ($error || $http_code !== 200) {
+				return false;
+			}
+
+			return $response;
+		}
+
 		function ha_ajax()
 		{
 			check_ajax_referer('helloassosecuritytoken11', 'security');
 
 			if (! is_user_logged_in() || ! current_user_can('manage_options')) {
-				wp_die('Vous n’avez pas les droits nécessaires pour exécuter cette action.');
+				wp_die('Vous n\'avez pas les droits nécessaires pour exécuter cette action.');
 			}
 
 			if (!isset($_POST['campaign']) or $_POST['campaign'] == '') {
@@ -493,7 +672,6 @@ class Hello_Asso_Admin
 				add_option('ha-name', $name, '', 'yes');
 			} elseif (isset($_POST['slug']) && is_numeric($_POST['error']) && is_array($campaign) && isset($_POST['increase']) && $_POST['increase'] > 1) {
 				$currentCampain = get_option('ha-campaign');
-				// increade current campain with campain
 				$campaign = array_merge($currentCampain, $campaign);
 				update_option('ha-campaign', $campaign);
 			} else {
