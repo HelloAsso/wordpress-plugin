@@ -481,7 +481,7 @@ class Hello_Asso_Admin
 			$sandbox = false;
 			$nameAsso = '';
 
-			if ($url !== false) {
+			if ($url !== false && isset($url['host'])) {
 				$domain = $url['host'];
 
 				if ($domain == 'helloasso-sandbox.com' || $domain == 'www.helloasso-sandbox.com') {
