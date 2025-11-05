@@ -56,9 +56,13 @@
 		<span class="ha-before-block">Vous administrez une association sur HelloAsso ?</span>
 		<div class="ha-blocks">
 			<div class="ha-block-white">
+				<div class="ha-description">
 				<h3 class="ha-title-block">Récupérez toutes vos campagnes en 1 clic</h3>
+					<p>Coller le slug de votre association qui se trouve dans l'URL de votre association</p>
+					<p>Exemple : <b>https://admin.helloasso.com/club-de-judo/accueil</b>  le slug ici est <b>club-de-judo</b></p>
+				</div>
 				<div class="ha-search-glob">
-					<input type="search" class="ha-search" onkeyup="haCheckInput()" value="<?= esc_html(get_option('ha-slug')); ?>" placeholder="Nom ou URL de mon organisme">
+					<input type="search" class="ha-search" onkeyup="haCheckInput()" value="<?= esc_html(get_option('ha-slug')); ?>" placeholder="Slug de mon association">
 					<span onclick="haResetInput()" class="ha-search-delete">
 						<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="M15 5L5 15" stroke="#BEBED7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

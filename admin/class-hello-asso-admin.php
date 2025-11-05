@@ -477,29 +477,13 @@ class Hello_Asso_Admin
 				return;
 			}
 
-			$url = parse_url($value);
 			$sandbox = false;
-			$nameAsso = '';
-
-			if ($url !== false && isset($url['host'])) {
-				$domain = $url['host'];
-
-				if ($domain == 'helloasso-sandbox.com' || $domain == 'www.helloasso-sandbox.com') {
-					$sandbox = true;
-				}
-
-				if ($domain != 'helloasso.com' && $domain != 'www.helloasso.com' && $domain != 'helloasso-sandbox.com' && $domain != 'www.helloasso-sandbox.com') {
-					$nameAsso = '';
-				} else {
-					$slug = explode('/', $value);
-					$nameAsso = isset($slug[4]) ? $slug[4] : '';
-				}
-			} else {
-				$nameAsso = sanitize_title_with_dashes($value);
-			}
-
-			if (empty($nameAsso)) {
-				wp_send_json_error('URL ou nom d\'association invalide.');
+			$organizationSlug = '';			
+			
+			$organizationSlug = sanitize_title_with_dashes($value);
+			
+			if (empty($organizationSlug)) {
+				wp_send_json_error('Slug d\'association invalide.');
 				return;
 			}
 
@@ -526,17 +510,17 @@ class Hello_Asso_Admin
 
 			$bearer_token = $token_data['access_token'];
 
-			$org_response = ha_curl_get($apiUrl . '/v5/organizations/' . $nameAsso, $bearer_token);
+			$org_response = ha_curl_get($apiUrl . '/v5/organizations/' . $organizationSlug, $bearer_token);
 
 			if ($org_response === false) {
-				wp_send_json_error('Erreur lors de la récupération des informations de l\'organisation.');
+				wp_send_json_error('Erreur lors de la récupération des informations de l\'association.');
 				return;
 			}
 
 			$org_data = json_decode($org_response, true);
 
 			if (!isset($org_data['name'])) {
-				wp_send_json_error('Organisation non trouvée.');
+				wp_send_json_error('Association non trouvée.');
 				return;
 			}
 
@@ -545,7 +529,7 @@ class Hello_Asso_Admin
 			$total_count = 0;
 
 			for ($i = 1; $i <= 5; $i++) {
-				$campaign_response = ha_curl_get($apiUrl . '/v5/organizations/' . $nameAsso . '/forms?pageSize=20&pageIndex=' . $i, $bearer_token);
+				$campaign_response = ha_curl_get($apiUrl . '/v5/organizations/' . $organizationSlug . '/forms?pageSize=20&pageIndex=' . $i, $bearer_token);
 
 				if ($campaign_response === false) {
 					continue;
@@ -576,7 +560,7 @@ class Hello_Asso_Admin
 				'asso_name' => $asso_name,
 				'campaigns' => $all_campaigns,
 				'total_count' => $total_count,
-				'slug' => $nameAsso
+				'slug' => $organizationSlug
 			);
 
 			wp_send_json($result);
