@@ -3,9 +3,9 @@ Contributors: helloasso, yohannkipfer
 Donate link: https://helloasso.com
 Tags: helloasso, paiement, association, crowdfunding, don
 Requires at least: 4.0
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.2.34
-Stable tag: 1.1.23
+Stable tag: 1.1.24
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
