@@ -165,7 +165,14 @@
 				<div class="ha-block-white">
 					<div class="ha-count">
 						<div class="ha-number-count"><?= esc_html($nbCampaign); ?></div>
-						<div class="ha-description-count">campagnes publiques rattachées à votre association</div>
+						<div class="ha-description-count">
+							<?= esc_html(_n(
+								'campagne publique rattachée à votre association',
+								'campagnes publiques rattachées à votre association',
+								$nbCampaign,
+								'hello-asso'
+							)); ?>
+						</div>
 					</div>
 					<?php
 					$campaign = get_option('ha-campaign');
