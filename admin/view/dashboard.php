@@ -69,6 +69,11 @@
 							<path d="M5 5L15 15" stroke="#BEBED7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
 						</svg>
 					</span>
+					<!-- <label for="ha-sandbox-checkbox" class="ha-sandbox-label ha-form-group">	
+						<input type="checkbox" class="ha-checkbox" id="ha-sandbox-checkbox">
+						Mode bac à sable
+					</label> -->
+				
 				</div>
 				<button class="ha-btn ha-btn-primary searchCampaign" <?php if (get_option('ha-slug') == '') {
 																			echo 'disabled';

@@ -477,7 +477,7 @@ class Hello_Asso_Admin
 				return;
 			}
 
-			$sandbox = false;
+			$sandbox = HELLO_ASSO_SANDBOX_MODE ?? false;
 			$organizationSlug = '';			
 			
 			$organizationSlug = sanitize_title_with_dashes($value);

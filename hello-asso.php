@@ -39,6 +39,11 @@ if (!defined('WPINC')) {
 define('HELLO_ASSO_VERSION', '1.1.23');
 
 /**
+ * Enable or disable sandbox mode.
+ */
+define('HELLO_ASSO_SANDBOX_MODE', true);
+
+/**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-hello-asso-activator.php
  */
