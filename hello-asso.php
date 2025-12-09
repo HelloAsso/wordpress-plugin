@@ -41,7 +41,7 @@ define('HELLO_ASSO_VERSION', '1.1.24');
 /**
  * Enable or disable sandbox mode.
  */
-define('HELLO_ASSO_SANDBOX_MODE', true);
+define('HELLO_ASSO_SANDBOX_MODE', false);
 
 /**
  * The code that runs during plugin activation.
