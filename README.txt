@@ -80,7 +80,10 @@ Please report security bugs found in the source code of the helloasso plugin thr
 2. Iframes des campagnes
 
 == Changelog ==
-= 1.1.22 =
+= 1.1.24 =
+* Corrections de l'affichage au pluriel des campagnes dans le dashboard
+
+= 1.1.23 =
 * Synchronisation avec organizationSlug seulement
 
 = 1.1.22 =
