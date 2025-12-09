@@ -162,7 +162,7 @@
 								<h5>La synchronisation a échouée</h5>
 							</div>
 						<?php endif; ?>
-						<h3><?= esc_html($nbCampaign); ?> campagnes publiques synchronisées</h3>
+						<h3><?= esc_html(sprintf(_n('%d campagne publique synchronisée', '%d campagnes publiques synchronisées', $nbCampaign, 'hello-asso'), $nbCampaign)); ?></h3>
 					</div>
 					<div class="ha-header-col">
 						<a href="<?= esc_url(admin_url()); ?>admin.php?page=hello-asso" class="ha-btn ha-btn-primary">Resynchroniser</a>

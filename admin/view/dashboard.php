@@ -69,6 +69,11 @@
 							<path d="M5 5L15 15" stroke="#BEBED7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
 						</svg>
 					</span>
+					<!-- <label for="ha-sandbox-checkbox" class="ha-sandbox-label ha-form-group">	
+						<input type="checkbox" class="ha-checkbox" id="ha-sandbox-checkbox">
+						Mode bac à sable
+					</label> -->
+				
 				</div>
 				<button class="ha-btn ha-btn-primary searchCampaign" <?php if (get_option('ha-slug') == '') {
 																			echo 'disabled';
@@ -160,7 +165,14 @@
 				<div class="ha-block-white">
 					<div class="ha-count">
 						<div class="ha-number-count"><?= esc_html($nbCampaign); ?></div>
-						<div class="ha-description-count">campagnes publiques rattachées à votre association</div>
+						<div class="ha-description-count">
+							<?= esc_html(_n(
+								'campagne publique rattachée à votre association',
+								'campagnes publiques rattachées à votre association',
+								$nbCampaign,
+								'hello-asso'
+							)); ?>
+						</div>
 					</div>
 					<?php
 					$campaign = get_option('ha-campaign');
