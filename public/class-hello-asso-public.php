@@ -109,12 +109,6 @@ class Hello_Asso_Public
 		{
 			$url = $atts['campaign'];
 			$type = $atts['type'];
-			$allowed_styles = array(
-				'style' => array(
-					'width' => array(),
-					'height' => array()
-				)
-			);
 
 			$pattern = '/^\d+px$/';
 
@@ -140,14 +134,11 @@ class Hello_Asso_Public
 			ob_start();
 ?>
 			<iframe
-				id="idIframe"
+				class="ha-widget-iframe"
 				src="<?= esc_url($url); ?><?= esc_html($type); ?>"
-				<?= wp_kses('height=' . $height . '"', $allowed_styles); ?>
-				<?= wp_kses('width=' . $width . '"', $allowed_styles); ?>
-				frameborder="0"
+				style="<?= esc_attr('width: ' . $width . '; height: ' . $height . '; border: none;'); ?>"
 				loading="lazy"
-				allowtransparency="true"
-				onload="resizeIframeMessage()"></iframe>
+				allowtransparency="true"></iframe>
 <?php
 			return ob_get_clean();
 		}
