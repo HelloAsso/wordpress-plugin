@@ -29,15 +29,26 @@
      * practising this, we should strive to set a better example in our own work.
      */
 
-    window.resizeIframeMessage = function () {
-        window.addEventListener('message', e => {
-            const dataHeight = e.data.height;
-            const idIframeElement = document.getElementById('idIframe')
+    // Widget iframes follow the height of their content, so they have no inner scroll:
+    // on widget step change (scrollToTop message), scroll the page back to the iframe top
+    window.addEventListener('message', e => {
+        const iframeElement = Array.from(document.querySelectorAll('iframe[src^="https://www.helloasso"]'))
+            .find(iframe => iframe.contentWindow === e.source);
 
-            if (dataHeight > parseFloat(idIframeElement.height || 0)) {
-                idIframeElement.height = dataHeight + 'px'
-            }
-        });
-    }
+        if (!e.data || !iframeElement) {
+            return;
+        }
+
+        if (e.data.height > parseFloat(iframeElement.style.height || iframeElement.height || 0)) {
+            iframeElement.style.height = e.data.height + 'px';
+        }
+
+        if (e.data.scrollToTop && iframeElement.getBoundingClientRect().top < 0) {
+            iframeElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+
+    // Kept for pages cached with the former markup (onload="resizeIframeMessage()")
+    window.resizeIframeMessage = function () {};
 
 })(jQuery);
