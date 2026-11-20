@@ -5,7 +5,7 @@ Tags: helloasso, paiement, association, crowdfunding, don
 Requires at least: 4.0
 Tested up to: 6.9
 Requires PHP: 7.2.34
-Stable tag: 1.1.25
+Stable tag: 1.1.26
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,6 +80,9 @@ Please report security bugs found in the source code of the helloasso plugin thr
 2. Iframes des campagnes
 
 == Changelog ==
+= 1.1.26 =
+* Correction de la hauteur des iframes, qui suit aussi le contenu du widget quand il rétrécit
+
 = 1.1.25 =
 * Retour automatique en haut du widget formulaire à chaque changement d'étape
 * Correction de la hauteur des iframes qui s'adapte au contenu du widget
