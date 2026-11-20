@@ -39,7 +39,7 @@
             return;
         }
 
-        if (e.data.height > parseFloat(iframeElement.style.height || iframeElement.height || 0)) {
+        if (e.data.height) {
             iframeElement.style.height = e.data.height + 'px';
         }
 
